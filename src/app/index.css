@@ -1,0 +1,14 @@
+/* src/index.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  /* Matches your light theme background so it doesn't flash white on load */
+  background-color: #faf7f2; 
+  overflow-x: hidden;
+}
