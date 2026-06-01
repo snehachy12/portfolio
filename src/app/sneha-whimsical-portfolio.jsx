@@ -323,7 +323,7 @@ const PROJECTS = [
   {
     num: "01", accent: A.accent,
     title: "SmartSplit",
-    image: "/assets/smartsplit.png",
+    image: "public/assets/smartsplit.png",
     tagline: "Split Smart. Pay Easy.",
     peek: "Warning: May contain trending payment memes 💸",
     desc: "An AI-assisted group expense web app featuring smart categorization, a mock UPI PayNow system, and fun meme-based payment reminders inside a Galactic-themed UI.",
@@ -333,7 +333,7 @@ const PROJECTS = [
   {
     num: "02", accent: A.mint,
     title: "Festo",
-    image: "/assets/campus.png",
+    image: "public/assets/campus.png",
     tagline: "Managing campus chaos, one registration at a time.",
     peek: "3 000+ students survived. Mostly.",
     desc: "Full-stack platform: QR check-ins, real-time capacity tracking, automated emails. Spreadsheets never stood a chance.",
@@ -343,7 +343,7 @@ const PROJECTS = [
   {
     num: "03", accent: A.sky,
     title: "Neuroscan AI",
-    image: "/assets/neuroscan.png",
+    image: "public/assets/neuroscan.png",
     tagline: "Data-driven framework for early disease detection.",
     peek: "Turning MRI scans into actionable insights.",
     desc: "Deep learning system classifying Alzheimer's stages from MRI images. Features class-imbalance handling and a Streamlit dashboard.",
