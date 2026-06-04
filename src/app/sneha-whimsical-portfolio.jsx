@@ -11,45 +11,45 @@ import {
 // ─────────────────────────────────────────────
 const THEMES = {
   light: {
-    bg:       "#faf7f2",
-    bgAlt:    "#f5f0e8",
-    bgCard:   "#faf7f2",
+    bg: "#faf7f2",
+    bgAlt: "#f5f0e8",
+    bgCard: "#faf7f2",
     bgCardHv: "#0e0c0a",
-    ink:      "#0e0c0a",
-    muted:    "rgba(14,12,10,0.42)",
-    border:   "rgba(14,12,10,0.10)",
-    navBg:    "rgba(250,247,242,0.85)",
+    ink: "#0e0c0a",
+    muted: "rgba(14,12,10,0.42)",
+    border: "rgba(14,12,10,0.10)",
+    navBg: "rgba(250,247,242,0.85)",
     quoteBlockBg: "#f5f0e8",
   },
   dark: {
-    bg:       "#0e0c0a",
-    bgAlt:    "#1a1714",
-    bgCard:   "#181512",
+    bg: "#0e0c0a",
+    bgAlt: "#1a1714",
+    bgCard: "#181512",
     bgCardHv: "#faf7f2",
-    ink:      "#f5f0e8",
-    muted:    "rgba(245,240,232,0.45)",
-    border:   "rgba(245,240,232,0.10)",
-    navBg:    "rgba(14,12,10,0.85)",
+    ink: "#f5f0e8",
+    muted: "rgba(245,240,232,0.45)",
+    border: "rgba(245,240,232,0.10)",
+    navBg: "rgba(14,12,10,0.85)",
     quoteBlockBg: "#1a1714",
   },
 };
 
 const A = {
   accent: "#ff4d1c",
-  mint:   "#00c896",
-  sky:    "#4da6ff",
-  lilac:  "#c084fc",
-  gold:   "#f59e0b",
+  mint: "#00c896",
+  sky: "#4da6ff",
+  lilac: "#c084fc",
+  gold: "#f59e0b",
 };
 
 const F = {
   display: "'Fraunces', serif",
-  sans:    "'Bricolage Grotesque', sans-serif",
-  mono:    "'DM Mono', monospace",
+  sans: "'Bricolage Grotesque', sans-serif",
+  mono: "'DM Mono', monospace",
 };
 
 const EASE_SPRING = { type: "spring", stiffness: 280, damping: 20 };
-const EASE_SOFT   = [0.34, 1.56, 0.64, 1];
+const EASE_SOFT = [0.34, 1.56, 0.64, 1];
 
 // ─────────────────────────────────────────────
 //  FONT LOADER
@@ -57,7 +57,7 @@ const EASE_SOFT   = [0.34, 1.56, 0.64, 1];
 function useFonts() {
   useEffect(() => {
     const el = document.createElement("link");
-    el.rel  = "stylesheet";
+    el.rel = "stylesheet";
     el.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,400;1,700&family=Bricolage+Grotesque:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap";
     document.head.appendChild(el);
     return () => document.head.removeChild(el);
@@ -188,8 +188,8 @@ function Navbar({ dark, onToggleDark, th }) {
   const [activeId, setActiveId] = useState("hero");
 
   const sections = [
-    ["Work",    "projects"],
-    ["About",   "about"],
+    ["Work", "projects"],
+    ["About", "about"],
     ["Contact", "contact"],
   ];
 
@@ -259,7 +259,9 @@ function Navbar({ dark, onToggleDark, th }) {
 
           <ThemeToggle dark={dark} onToggle={onToggleDark} />
 
-          <motion.a href="#"
+          <motion.a
+            href="/resume/sneha_choudhary_resume.pdf"
+            download="sneha_choudhary_resume.pdf"
             whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.88, rotate: -3 }}
             style={{
               fontFamily: F.sans, fontSize: "0.78rem", fontWeight: 700,
@@ -280,17 +282,17 @@ function Navbar({ dark, onToggleDark, th }) {
 //  TILT CARD
 // ─────────────────────────────────────────────
 function TiltCard({ children, accent = A.accent }) {
-  const ref  = useRef(null);
+  const ref = useRef(null);
   const rotX = useMotionValue(0), rotY = useMotionValue(0);
-  const sX   = useSpring(rotX, { stiffness: 200, damping: 22 });
-  const sY   = useSpring(rotY, { stiffness: 200, damping: 22 });
+  const sX = useSpring(rotX, { stiffness: 200, damping: 22 });
+  const sY = useSpring(rotY, { stiffness: 200, damping: 22 });
   const glow = useTransform(sY, [-15, 15], [`${accent}00`, `${accent}28`]);
 
   const onMove = useCallback((e) => {
     const r = ref.current?.getBoundingClientRect();
     if (!r) return;
-    rotY.set(((e.clientX - r.left) / r.width  - 0.5) * 18);
-    rotX.set(-((e.clientY - r.top)  / r.height - 0.5) * 12);
+    rotY.set(((e.clientX - r.left) / r.width - 0.5) * 18);
+    rotX.set(-((e.clientY - r.top) / r.height - 0.5) * 12);
   }, []);
 
   return (
@@ -354,14 +356,14 @@ const PROJECTS = [
 
 function ProjectCard({ p, index, th, dark }) {
   const [hovered, setHovered] = useState(false);
-  const ref    = useRef(null);
+  const ref = useRef(null);
   const inView = useInViewSimple(ref);
 
   // light mode hover → card goes dark → text goes white
   // dark mode hover  → card goes light cream → text goes dark ink
-  const cardBg   = hovered ? th.bgCardHv : th.bgCard;
-  const textMain = hovered ? (th === THEMES.light ? "#fff" : "#0e0c0a") : th.ink; 
-  const textSub  = hovered ? (th === THEMES.light ? "rgba(255,255,255,0.5)" : "rgba(14,12,10,0.5)") : th.muted;
+  const cardBg = hovered ? th.bgCardHv : th.bgCard;
+  const textMain = hovered ? (th === THEMES.light ? "#fff" : "#0e0c0a") : th.ink;
+  const textSub = hovered ? (th === THEMES.light ? "rgba(255,255,255,0.5)" : "rgba(14,12,10,0.5)") : th.muted;
   return (
     <motion.div ref={ref}
       initial={{ opacity: 0, y: 56 }}
@@ -537,7 +539,7 @@ function Confetti({ origin }) {
 //  TIMELINE ITEM
 // ─────────────────────────────────────────────
 function TimelineItem({ year, role, org, detail, color, i, th }) {
-  const ref    = useRef(null);
+  const ref = useRef(null);
   const inView = useInViewSimple(ref);
   return (
     <motion.div ref={ref}
@@ -563,28 +565,28 @@ function TimelineItem({ year, role, org, detail, color, i, th }) {
 //  DATA
 // ─────────────────────────────────────────────
 const SKILLS = [
-  { label: "React.js",               color: A.sky,    delay: 0.05 },
-  { label: "TypeScript",             color: A.accent, delay: 0.10 },
-  { label: "Figma",                  color: A.lilac,  delay: 0.15 },
-  { label: "API Integration",        color: A.mint,   delay: 0.20 },
-  { label: "Tailwind CSS",           color: A.sky,    delay: 0.25 },
+  { label: "React.js", color: A.sky, delay: 0.05 },
+  { label: "TypeScript", color: A.accent, delay: 0.10 },
+  { label: "Figma", color: A.lilac, delay: 0.15 },
+  { label: "API Integration", color: A.mint, delay: 0.20 },
+  { label: "Tailwind CSS", color: A.sky, delay: 0.25 },
   { label: "Component Architecture", color: A.accent, delay: 0.30 },
-  { label: "Node.js",                color: "#22c55e",delay: 0.35 },
-  { label: "UI/UX Design",           color: A.lilac,  delay: 0.40 },
-  { label: "Next.js",                color: A.mint,   delay: 0.45 },
-  { label: "Python",                 color: A.gold,   delay: 0.50 },
+  { label: "Node.js", color: "#22c55e", delay: 0.35 },
+  { label: "UI/UX Design", color: A.lilac, delay: 0.40 },
+  { label: "Next.js", color: A.mint, delay: 0.45 },
+  { label: "Python", color: A.gold, delay: 0.50 },
 ];
 
 const TIMELINE = [
-  { year: "JUNE 2024",       role: "Web Development Intern",  org: "In-House Internship",    detail: "Architected and deployed a full-featured e-commerce application with a focus on UX and state management.", color: A.mint  },
-  { year: "DEC 2024–2025",   role: "Web Development Intern",  org: "Compozent",              detail: "Intensive training-based internship; mastered advanced frontend patterns and modern web development workflows.", color: A.gold  },
-  { year: "JAN 2026–PRESENT",role: "Frontend Developer",      org: "TechStudios · Mumbai",   detail: "Rebuilt design system in React + Tailwind. Cut UI bug reports by 33% and reduced code duplication by 60%.", color: A.sky   },
+  { year: "JUNE 2024", role: "Web Development Intern", org: "In-House Internship", detail: "Architected and deployed a full-featured e-commerce application with a focus on UX and state management.", color: A.mint },
+  { year: "DEC 2024–2025", role: "Web Development Intern", org: "Compozent", detail: "Intensive training-based internship; mastered advanced frontend patterns and modern web development workflows.", color: A.gold },
+  { year: "JAN 2026–PRESENT", role: "Frontend Developer Intern", org: "TechStudios · Mumbai", detail: "Rebuilt design system in React + Tailwind. Cut UI bug reports by 33% and reduced code duplication by 60%.", color: A.sky },
 ];
 
 const SOCIAL_LINKS = [
-  { label: "GitHub",   sub: "@snehachy12",          href: "https://github.com/snehachy12",         emoji: "⌥", color: "#555" },
-  { label: "LinkedIn", sub: "Sneha Choudhary",       href: "https://linkedin.com/in/sneha-choudhary", emoji: "◈", color: A.sky  },
-  { label: "Email",    sub: "sneha.p.chy04@gmail.com", href: "copy",                               emoji: "◎", color: A.accent },
+  { label: "GitHub", sub: "@snehachy12", href: "https://github.com/snehachy12", emoji: "⌥", color: "#555" },
+  { label: "LinkedIn", sub: "Sneha Choudhary", href: "https://www.linkedin.com/in/sneha-choudhary-0aaa46260/", emoji: "◈", color: A.sky },
+  { label: "Email", sub: "sneha.p.chy04@gmail.com", href: "copy", emoji: "◎", color: A.accent },
 ];
 
 const EASTER_MSGS = [
@@ -597,7 +599,7 @@ const EASTER_MSGS = [
 // ─────────────────────────────────────────────
 export default function App() {
   useFonts();
-  const [dark, setDark]     = useState(false);
+  const [dark, setDark] = useState(false);
   const [curtain, setCurtain] = useState(false);
   const [confettis, setConfettis] = useState([]);
   const [eggClicks, setEggClicks] = useState(0);
@@ -624,7 +626,7 @@ export default function App() {
 
   const handleCopy = (e, email) => {
     e.preventDefault();
-    navigator.clipboard.writeText(email).catch(() => {});
+    navigator.clipboard.writeText(email).catch(() => { });
     setCopied(true);
     setTimeout(() => setCopied(false), 2200);
   };
@@ -762,12 +764,12 @@ export default function App() {
               <h3 style={{ fontFamily: F.display, fontSize: "1.6rem", fontWeight: 900, color: th.ink, marginBottom: "2rem" }}>Also, I'm into…</h3>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
                 {[
-                  { emoji: "🎌", label: "Anime",        sub: "FMAB is peak",           color: A.accent, rotation: -4,  delay: 0.1 },
-                  { emoji: "🎬", label: "K-Dramas",     sub: "I have a ranked list",   color: A.sky,    rotation:  3,  delay: 0.2 },
-                  { emoji: "🇫🇷", label: "French",      sub: "Intermediate (🥐)",      color: A.mint,   rotation: -2,  delay: 0.3 },
-                  { emoji: "☕", label: "Café Coding",  sub: "Non-negotiable",         color: A.gold,   rotation:  5,  delay: 0.4 },
-                  { emoji: "📐", label: "System Design",sub: "Atomic design fan",      color: A.lilac,  rotation: -3,  delay: 0.5 },
-                  { emoji: "🎧", label: "Lo-fi Logic",  sub: "Deep work playlist",     color: A.mint,   rotation:  2,  delay: 0.6 },
+                  { emoji: "🎌", label: "Anime", sub: "FMAB is peak", color: A.accent, rotation: -4, delay: 0.1 },
+                  { emoji: "🎬", label: "K-Dramas", sub: "I have a ranked list", color: A.sky, rotation: 3, delay: 0.2 },
+                  { emoji: "🇫🇷", label: "French", sub: "Intermediate (🥐)", color: A.mint, rotation: -2, delay: 0.3 },
+                  { emoji: "☕", label: "Café Coding", sub: "Non-negotiable", color: A.gold, rotation: 5, delay: 0.4 },
+                  { emoji: "📐", label: "System Design", sub: "Atomic design fan", color: A.lilac, rotation: -3, delay: 0.5 },
+                  { emoji: "🎧", label: "Lo-fi Logic", sub: "Deep work playlist", color: A.mint, rotation: 2, delay: 0.6 },
                 ].map(s => <Sticker key={s.label} {...s} th={th} />)}
               </div>
             </div>
@@ -853,10 +855,10 @@ export default function App() {
                   {/* Icon */}
                   {isCopy ? (
                     copied
-                      ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={A.mint} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={l.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                      ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={A.mint} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                      : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={l.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
                   ) : (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={l.color} strokeWidth="2" opacity="0.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={l.color} strokeWidth="2" opacity="0.5"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
                   )}
                 </motion.a>
               );
